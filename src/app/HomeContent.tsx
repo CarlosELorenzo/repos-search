@@ -1,14 +1,14 @@
 "use client";
 
 import { Stack } from "@mui/material";
-import { RepositoryList } from "./repository/List";
-import { Pagination } from "./Pagination";
+import { RepositoryList } from "../components/repository/List";
+import { Pagination } from "../components/Pagination";
 import { RepositoriesSearchResult } from "@/utils/api";
 import { useSearch } from "@/hooks/useSearch";
-import { Header } from "./Header";
-import { NoResultsMessage } from "./NoResultsMessage";
+import { Header } from "../components/Header";
+import { NoResultsMessage } from "../components/NoResultsMessage";
 import { SearchParams } from "@/app/page";
-import { ErrorMessage } from "./ErrorMessage";
+import { ErrorMessage } from "../components/ErrorMessage";
 
 type ContentProps = {
   searchParams: SearchParams;
@@ -30,11 +30,18 @@ export const HomeContent = ({ searchParams, result }: ContentProps) => {
     searchParams?.search && result?.repositories && !isError && !isNoResults;
 
   return (
-    <Stack py={4} justifyContent="center" alignItems="center" gap={3}>
+    <Stack
+      py={4}
+      justifyContent="center"
+      alignItems="center"
+      gap={showResults ? 3 : 6}
+      minHeight="100%"
+    >
       <Header
         handleSearch={handleSearch}
         searchParams={clientSearchParams}
         isLoading={isLoading}
+        noResultsShown={!showResults}
       />
 
       {isError && <ErrorMessage />}

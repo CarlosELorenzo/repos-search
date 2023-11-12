@@ -1,7 +1,7 @@
 "use server";
 import { SearchApiParams, searchApiRequest } from "@/utils/api";
 import { Container } from "@mui/material";
-import { HomeContent } from "@/components/HomeContent";
+import { HomeContent } from "@/app/HomeContent";
 
 export type SearchParams = {
   search: string | undefined;
@@ -21,10 +21,8 @@ export default async function Home({ searchParams }: HomePageProps) {
   const result = await searchApiRequest(apiParams);
 
   return (
-    <main>
-      <Container>
-        <HomeContent searchParams={searchParams} result={result} />
-      </Container>
-    </main>
+    <Container component="main" sx={{ height: "100%" }}>
+      <HomeContent searchParams={searchParams} result={result} />
+    </Container>
   );
 }

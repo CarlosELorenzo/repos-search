@@ -13,12 +13,14 @@ type SearchBarProps = {
   handleSearch?: (e: React.FormEvent<HTMLFormElement>) => void;
   searchParams: ReadonlyURLSearchParams;
   isLoading: boolean;
+  noResultsShown?: boolean;
 };
 
 export const SearchBar = ({
   handleSearch,
   searchParams,
   isLoading,
+  noResultsShown,
 }: SearchBarProps) => {
   return (
     <>
@@ -31,7 +33,8 @@ export const SearchBar = ({
         borderRadius={24}
         bgcolor={colors.grey[800]}
         height="100%"
-        width="100%"
+        width={"100%"}
+        maxWidth={{ xs: "100%", sm: noResultsShown ? "600px" : "100%" }}
         px={2}
       >
         <TextField
@@ -41,6 +44,7 @@ export const SearchBar = ({
           name="search"
           size="small"
           color="primary"
+          autoComplete="off"
           defaultValue={searchParams?.get("search") || ""}
           sx={{ flexGrow: 1 }}
           InputProps={{

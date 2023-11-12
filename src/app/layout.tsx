@@ -16,7 +16,10 @@ export default function RootLayout({
 }) {
   return (
     <html lang="en">
-      <body className={inter.className} style={{ backgroundColor: "#212121" }}>
+      <body
+        className={inter.className}
+        style={{ backgroundColor: "#212121", height: "100vh" }}
+      >
         <ThemeRegistry options={{ key: "mui" }}>{children}</ThemeRegistry>
       </body>
     </html>
