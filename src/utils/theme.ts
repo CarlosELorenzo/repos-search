@@ -18,6 +18,15 @@ export const theme = createTheme({
       color: palette.primary.main,
     },
   }),
+  components: {
+    MuiInput: {
+      styleOverrides: {
+        root: {
+          color: colors.grey[100],
+          paddingTop: 4,
+        },
+      },
+    },
   palette: {
     primary: {
       main: colors.grey[100],
