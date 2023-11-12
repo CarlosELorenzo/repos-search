@@ -1,6 +1,10 @@
 "use client";
 import { RepositoriesSearchResult } from "@/utils/api";
-import { useRouter, useSearchParams } from "next/navigation";
+import {
+  ReadonlyURLSearchParams,
+  useRouter,
+  useSearchParams,
+} from "next/navigation";
 import { useEffect, useState } from "react";
 
 type useSearchProps = {
@@ -34,10 +38,20 @@ export const useSearch = ({ result }: useSearchProps) => {
     router.push(createUrl("/", newParams));
   };
 
+  const handlePageChange = (e: React.ChangeEvent<unknown>, page: number) => {
+    const newParams = new URLSearchParams(searchParams.toString());
+
+    if (page !== 1) newParams.set("page", page.toString());
+    else newParams.delete("page");
+    router.push(createUrl("/", newParams));
+  };
+
   return {
     searchParams,
     handleSearch,
     isLoading,
+    handlePageChange,
+    page: getPageFromSearchParams(searchParams),
   };
 };
 
@@ -47,3 +61,6 @@ function createUrl(path: string, params: URLSearchParams) {
   return url.toString();
 }
 
+function getPageFromSearchParams(searchParams: ReadonlyURLSearchParams) {
+  return parseInt(searchParams.get("page") ?? "") || 1;
+}

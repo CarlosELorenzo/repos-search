@@ -27,6 +27,16 @@ export const theme = createTheme({
         },
       },
     },
+    MuiPaginationItem: {
+      styleOverrides: {
+        root: {
+          color: colors.grey[500],
+          borderColor: colors.grey[500],
+          border: "none",
+        },
+      },
+    },
+  },
   palette: {
     primary: {
       main: colors.grey[100],
